@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyNetwork - Моя социальная сеть</title>
+    <link rel="stylesheet" href="/public/css/style.css">  
+</head>
+<body>
+
+    <header class="top-nav">
+        <div class="logo">MyNetwork</div>
+        <div class="search-box">
+            <input type="text" placeholder="Поиск пользователей...">
+        </div>
+        <div class="user-controls">
+            <span id="display-username" style="margin-right: 10px; font-weight: bold;"></span>
+            <button id="theme-toggle">🌙 Темная</button>
+            <a href="/auth/logout" style="text-decoration: none;">
+                <button id="logout-btn" style="background: #ff4757; color: white; border: none; padding: 6px 12px; border-radius: 20px; cursor: pointer; margin-right: 10px; font-weight: bold;">Выйти</button>
+            </a>
+            <div class="mini-avatar" id="header-avatar"></div>
+        </div>
+    </header>
+
+    <div class="container">
+            <aside class="sidebar">
+               <div class="widget">
+                <div class="nav-item active" onclick="switchSection('feed-section', this)">🏠<span>Главная</span></div>
+				<div class="nav-item" onclick="window.location.href='profile.html'">
+                   👤 <span>Мой профиль</span>
+                  </div>                
+				  <div class="nav-item" onclick="loadFriendsSection(this)">👥 <span>Друзья</span></div>
+                      <div class="nav-item" onclick="window.location.href='/messages.html'">
+                   ✉️ <span>Сообщения</span>
+                    <span id="msg-badge" style="display:none; background: #ff4757; color: white; border-radius: 50%; padding: 2px 7px; font-size: 11px; margin-left: 5px; font-weight: bold;">0</span>
+                      </div>
+                   <div class="nav-item" onclick="openSettings()">⚙️ <span>Настройки</span></div>
+               </div>
+            </aside>
+
+        <main class="feed">
+            
+            <div id="feed-section">
+                <div class="create-post-card">
+                    <div class="create-post-header">
+                        <img src="" id="current-user-avatar-small" class="mini-avatar" alt="">
+                        <textarea id="post-text" placeholder="Что у вас нового?" oninput="autoResize(this)"></textarea>
+                    </div>
+
+                    <div id="preview-container" class="post-preview-wrapper">
+                        <div class="preview-overlay">
+                            <button type="button" class="close-preview" onclick="clearPhoto()">✕</button>
+                        </div>
+                        <img id="post-preview" src="" alt="">
+                    </div>
+
+                    <div class="create-post-footer">
+                        <div class="post-actions">
+                            <button type="button" class="action-btn photo-btn" onclick="document.getElementById('post-image-file').click()">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M19 7H5c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm0 12H5V9h14v10zM12 11l-2.5 3.5L8 12l-3 4h14l-4.5-6z"/></svg>
+                                <span id="file-name-display">Фото</span>
+                            </button>
+                            <input type="file" id="post-image-file" accept="image/*" style="display: none;" onchange="updateFileName()">
+                        </div>
+                        <button class="publish-btn" id="main-post-btn" onclick="createNewPost()">Опубликовать</button>
+                    </div>
+                </div>
+
+                <div id="posts-container"></div>
+            </div>
+
+            <div id="profile-section" style="display: none;">
+                <div id="profile-header">
+                    <div class="profile-main-card" style="background: white; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden; border: 1px solid #eee;">
+                        <div style="height: 150px; background: linear-gradient(135deg, #6e8efb, #a777e3); position: relative;"></div>
+                        <div style="padding: 20px; text-align: center; position: relative;">
+                            <div id="profile-avatar-letter" style="width: 100px; height: 100px; border-radius: 50%; background: #007bff; color: white; border: 5px solid white; position: absolute; top: -50px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; font-size: 40px; font-weight: bold;">?</div>
+                            <div style="margin-top: 50px;">
+                                <h2 id="profile-name-display" style="margin: 0; font-size: 26px; color: #333;">Имя</h2>
+                                <p id="profile-username-tag" style="color: #888; margin: 5px 0;">@username</p>
+                                <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px;">
+                                    <button onclick="switchSection('feed-section')" style="padding: 10px 25px; border-radius: 25px; border: 1px solid #ddd; background: white; cursor: pointer;">🏠 Лента</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="user-posts-container"></div>
+            </div>
+
+            <div id="friends-section" style="display: none;">
+                <div class="widget">
+                    <h3>Все пользователи</h3>
+                    <div id="friends-list-full">Тут будет список всех людей...</div>
+                </div>
+            </div>
+
+            <div id="messages-section" style="display: none;">
+                <div class="widget">
+                    <h3>Мои диалоги</h3>
+                    <p>Список ваших чатов появится здесь.</p>
+                </div>
+            </div>
+
+        </main>
+
+        <aside class="extra">
+            <div class="widget">
+                <h3>Мой профиль</h3>
+                <input type="text" id="user-name-input" placeholder="Имя" style="width: 100%; margin-bottom: 10px; padding: 8px; border-radius: 8px; border: 1px solid #ddd; box-sizing: border-box;">
+                <input type="file" id="user-avatar-file" accept="image/*" style="display: none;" onchange="uploadAvatar()">
+                <button type="button" onclick="document.getElementById('user-avatar-file').click()" style="width: 100%; cursor: pointer; color: #007bff; margin-bottom: 10px; font-size: 14px; background: #f0f2f5; padding: 8px; border: none; border-radius: 8px; font-weight: bold;">📷 Сменить аватар</button>
+                <button id="save-profile" onclick="updateProfile()" style="width: 100%; background: #007bff; color: white; border: none; padding: 10px; border-radius: 8px; cursor: pointer; font-weight: bold;">Сохранить</button>
+            </div>
+
+         </aside>
+    </div>
+
+    <div id="notification-box" class="notification"></div>
+
+    <div id="chat-modal" style="display: none; position: fixed; bottom: 20px; right: 20px; width: 320px; height: 450px; background: white; border-radius: 15px; box-shadow: 0 8px 30px rgba(0,0,0,0.2); flex-direction: column; z-index: 1000; border: 1px solid #eee;">
+        <div style="background: #007bff; color: white; padding: 12px; border-radius: 15px 15px 0 0; display: flex; justify-content: space-between; align-items: center;">
+            <span id="chat-with-name" style="font-weight: bold;">Чат</span>
+            <button onclick="closeChat()" style="background: none; border: none; color: white; cursor: pointer;">✕</button>
+        </div>
+        <div id="chat-messages" style="flex: 1; overflow-y: auto; padding: 15px; background: #f9f9f9;"></div>
+        <div style="padding: 12px; border-top: 1px solid #eee; display: flex; gap: 8px;">
+            <input type="text" id="chat-input" placeholder="Сообщение..." style="flex: 1; border: 1px solid #ddd; border-radius: 20px; padding: 8px 15px;">
+            <button onclick="sendMessage()" style="background: #007bff; color: white; border: none; border-radius: 50%; width: 35px; height: 35px;">➤</button>
+        </div>
+    </div>
+
+    <div id="settings-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; align-items: center; justify-content: center; backdrop-filter: blur(5px);">
+        <div style="background: white; padding: 30px; border-radius: 20px; width: 90%; max-width: 400px;">
+            <h2 style="margin-top: 0; text-align: center;">Настройки</h2>
+            <input type="text" id="user-name-input-modal" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; margin-bottom: 20px; box-sizing: border-box;">
+            <div style="display: flex; gap: 10px;">
+                <button onclick="closeSettings()" style="flex: 1; padding: 12px; border-radius: 10px; background: #f0f2f5;">Отмена</button>
+                <button onclick="saveNewName()" style="flex: 1; padding: 12px; border-radius: 10px; background: #007bff; color: white;">Сохранить</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/public/js/script.js"></script>
+    
+    <script>
+        function switchSection(sectionId, element) {
+            // Скрываем все секции
+            document.getElementById('feed-section').style.display = 'none';
+            document.getElementById('profile-section').style.display = 'none';
+            document.getElementById('friends-section').style.display = 'none';
+            document.getElementById('messages-section').style.display = 'none';
+
+            // Показываем нужную
+            document.getElementById(sectionId).style.display = 'block';
+
+            // Убираем активный класс у всех кнопок меню
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            // Добавляем активный класс нажатой кнопке
+            if(element) element.classList.add('active');
+        }
+		
+    </script>
+</body>
+</html>

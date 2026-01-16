@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Мой Профиль | MyNetwork</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-card">
+            <img id="p-avatar" src="/uploads/default.png" alt="Аватар">
+            <h2 id="p-username">Загрузка...</h2>
+			<div class="user-info-details" style="text-align: left; margin: 15px 0; color: #555;">
+    <p><i class="fas fa-globe"></i> <strong>Страна:</strong> <span id="p-country">---</span></p>
+    <p><i class="fas fa-city"></i> <strong>Город:</strong> <span id="p-city">---</span></p>
+    <p><i class="fas fa-phone"></i> <strong>Телефон:</strong> <span id="p-phone">---</span></p>
+    <p><i class="fas fa-birthday-cake"></i> <strong>Дата рождения:</strong> <span id="p-birthdate">---</span></p>
+</div>
+			<button id="openEditBtn" class="profile-btn btn-edit"><i class="fas fa-user-edit"></i> Редактировать</button>
+ 
+            <p><i class="fas fa-circle" style="color: #2ecc71;"></i> В сети</p>
+            
+            <div class="profile-menu">
+                <a href="/index.html" class="profile-btn btn-home">
+                    <i class="fas fa-house"></i> На главную
+                </a>
+                <a href="/auth/logout" class="profile-btn btn-logout">
+                    <i class="fas fa-right-from-bracket"></i> Выйти из системы
+                </a>
+            </div>
+        </div>
+    </div>
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h3>Редактировать профиль</h3>
+    <form id="editProfileForm">
+    <label>Имя для отображения</label>
+    <input type="text" id="editDisplayName" name="displayName" placeholder="Ваше имя">
+    
+    <label>Местоположение</label>
+    <div style="display: flex; gap: 10px;">
+        <input type="text" id="editCountry" name="country" placeholder="Страна">
+        <input type="text" id="editCity" name="city" placeholder="Город">
+    </div>
+    
+    <label>Телефон</label>
+    <input type="text" id="editPhone" name="phone" placeholder="+7 (___) ___ __ __">
+
+    <label>Дата рождения</label>
+    <div class="birth-date-row">
+        <input type="number" id="editBirthDay" name="birthDay" placeholder="ДД">
+        <input type="text" id="editBirthMonth" name="birthMonth" placeholder="Месяц">
+        <input type="number" id="editBirthYear" name="birthYear" placeholder="ГГГГ">
+    </div>
+
+    <label>Фото профиля</label>
+    <input type="file" id="editAvatar" name="avatar" accept="image/*">
+    
+    <button type="submit" class="btn-save-profile">Сохранить всё</button>
+</form>
+    </div>
+</div>
+   <script src="public/js/profile-handler.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "my-social-network",
+  "version": "1.0.0",
+  "description": "Моя первая социальная сеть",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "type": "commonjs",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "express": "^4.22.1",
+    "express-session": "^1.17.3",
+    "multer": "^2.0.2"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

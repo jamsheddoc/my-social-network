@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль пользователя</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="profile-wrapper">
+        <div class="cover-photo">
+            <div class="back-nav" onclick="history.back()">
+                <i class="fas fa-arrow-left"></i> Назад
+            </div>
+        </div>
+
+        <div class="profile-header-main">
+            <div class="avatar-container">
+                <img id="visitor-avatar" src="/uploads/default.png">
+            </div>
+
+            <div class="user-info">
+                <h1 id="visitor-name">Загрузка...</h1>
+                <p id="visitor-username">@username</p>
+            </div>
+
+            <div class="profile-btns">
+                <div id="friend-action-container"></div>
+                <button id="msg-send-btn" class="btn-action btn-message">
+                    <i class="fas fa-comment"></i> Сообщение
+                </button>
+            </div>
+
+            <div class="stats-container">
+                <div class="stat-box"><span class="stat-num">150</span><span class="stat-text">Друзья</span></div>
+                <div class="stat-box"><span class="stat-num">42</span><span class="stat-text">Посты</span></div>
+                <div class="stat-box"><span class="stat-num">1.2k</span><span class="stat-text">Фото</span></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/public/js/user-profile.js"></script>
+</body>
+</html>
