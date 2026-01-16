@@ -629,7 +629,7 @@ body.dark-mode .active-link {
     height: 80vh;
     background: white;
     margin: 20px auto;
-    max-width: 1000px;
+    width: 95%; max-width: 1000px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
@@ -657,7 +657,7 @@ body.dark-mode .active-link {
 
 .chat-container {
     display: flex;
-    max-width: 1000px;
+    width: 95%; max-width: 1000px;
     margin: 20px auto;
     height: 85vh;
     background: #fff;
