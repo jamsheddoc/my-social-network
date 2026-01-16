@@ -1,0 +1,1052 @@
+/* --- 1. ОСНОВНЫЕ СТИЛИ --- */
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    color: #1c1e21;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* --- 2. СЕТКА И ШАПКА --- */
+.top-nav {
+    background: #fff;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-bottom: 1px solid #ddd;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+main { width: 600px; max-width: 100%; }
+
+/* Делаем боковые колонки "липкими" */
+.sidebar, .extra { 
+    width: 250px; 
+    position: sticky;
+    top: 80px;
+    height: fit-content;
+}
+
+/* --- 3. ПОСТЫ И КАРТОЧКИ --- */
+.post, .create-post-card, .widget {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border: 1px solid #e6ecf0;
+    box-sizing: border-box;
+    word-wrap: break-word;
+}
+
+.post-content {
+    display: block;
+    width: 100%;
+    white-space: pre-wrap; 
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 10px 0;
+    max-height: 250px; /* Ограничение высоты текста */
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.post-img {
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 10px;
+    max-height: 350px;
+    object-fit: cover;
+}
+
+/* --- 4. БЛОК СОЗДАНИЯ ПОСТА --- */
+.create-post-header { display: flex; gap: 12px; align-items: flex-start; }
+
+.mini-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background-color: #eee;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+#post-text {
+    flex: 1; border: none; outline: none;
+    font-size: 16px; font-family: inherit;
+    resize: none; padding: 8px 0;
+    min-height: 40px; background: transparent;
+}
+
+/* Превью выбранного фото */
+.post-preview-wrapper {
+    display: none; position: relative;
+    margin-top: 12px; border-radius: 8px;
+    overflow: hidden; max-height: 250px;
+    border: 1px solid #eee;
+}
+
+#post-preview { width: 100%; height: 100%; object-fit: cover; }
+
+.close-preview {
+    position: absolute; top: 10px; right: 10px;
+    background: rgba(0,0,0,0.6); color: #fff;
+    border: none; border-radius: 50%;
+    width: 30px; height: 30px; cursor: pointer;
+}
+
+/* --- 5. ВИДЖЕТЫ (БОКОВЫЕ БЛОКИ) --- */
+.widget-title {
+    font-size: 16px; font-weight: 700;
+    margin-bottom: 15px; border-bottom: 1px solid #f0f2f5;
+    padding-bottom: 10px; display: flex; align-items: center; gap: 8px;
+}
+
+.side-menu { list-style: none; padding: 0; margin: 0; }
+
+.side-menu li {
+    padding: 10px; border-radius: 8px;
+    cursor: pointer; transition: 0.2s;
+    display: flex; align-items: center; gap: 12px;
+    font-weight: 500; color: #4b4f56;
+}
+
+.side-menu li:hover { background-color: #f0f2f5; color: #007bff; }
+
+.user-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 0; border-bottom: 1px solid #f9f9f9;
+}
+
+/* --- 6. КНОПКИ И УВЕДОМЛЕНИЯ --- */
+.create-post-footer {
+    display: flex; justify-content: space-between;
+    margin-top: 12px; padding-top: 12px; border-top: 1px solid #f0f2f5;
+}
+
+.action-btn {
+    background: #f0f2f5; border: none; padding: 8px 16px;
+    border-radius: 20px; color: #45bd62; font-weight: 600; cursor: pointer;
+}
+
+.publish-btn {
+    background: #007bff; color: white; border: none;
+    padding: 8px 25px; border-radius: 20px; font-weight: 600;
+    cursor: pointer; box-shadow: 0 4px 6px rgba(0,123,255,0.15);
+}
+
+#notification-box {
+    display: none; position: fixed;
+    bottom: 25px; right: 25px;
+    background: #2ecc71; color: white;
+    padding: 15px 25px; border-radius: 8px;
+    z-index: 2000; font-weight: bold;
+    animation: slideInRight 0.4s ease-out;
+}
+
+/* --- 7. ТЕМНАЯ ТЕМА --- */
+body.dark-mode { background-color: #18191a; color: #e4e6eb; }
+
+body.dark-mode .top-nav, 
+body.dark-mode .post, 
+body.dark-mode .create-post-card,
+body.dark-mode .widget {
+    background-color: #242526; border-color: #3e4042; color: #e4e6eb;
+}
+
+body.dark-mode #post-text { color: white; }
+body.dark-mode .action-btn { background: #3a3b3c; }
+body.dark-mode .side-menu li { color: #b0b3b8; }
+body.dark-mode .side-menu li:hover { background-color: #3a3b3c; color: #fff; }
+body.dark-mode .widget-title { border-color: #3e4042; }
+
+/* АНИМАЦИИ */
+@keyframes slideInRight {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+.active-link {
+    background-color: #e7f3ff !important;
+    color: #007bff !important;
+    border-left: 4px solid #007bff;
+    border-radius: 4px 8px 8px 4px !important;
+}
+
+body.dark-mode .active-link {
+    background-color: #1a2533 !important;
+    color: #2e89ff !important;
+}
+/* Стили специально для страницы регистрации */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.auth-card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    width: 380px;
+    text-align: center;
+}
+
+.avatar-picker {
+    margin-bottom: 20px;
+    position: relative;
+    display: inline-block;
+}
+.file-label {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #667eea;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 2px solid white;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.input-group i {
+    position: absolute;
+    left: 15px;
+    top: 13px;
+    color: #667eea;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px 12px 45px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.reg-btn {
+    width: 100%;
+    padding: 12px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+/* Чтобы текст был под инпутом, а не под иконкой */
+}
+/* Стили специально для страницы профиля */
+.profile-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #667eea;
+    margin: 0 auto 20px;
+    display: block;
+}
+
+#userStatus {
+    color: #888;
+    margin-bottom: 25px;
+}
+
+/* --- СТИЛИ СТРАНИЦЫ ПРОФИЛЯ --- */
+.profile-body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.profile-card {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    text-align: center;
+    width: 100%;
+    max-width: 380px;
+    backdrop-filter: blur(10px);
+}
+
+.avatar-container {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 20px;
+}
+
+.profile-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #667eea;
+}
+
+.user-info h2 {
+    margin: 0;
+    color: #333;
+    font-size: 26px;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+}
+
+.stat-item b {
+    display: block;
+    font-size: 18px;
+    color: #333;
+}
+
+.stat-item span {
+    font-size: 11px;
+    color: #999;
+    text-transform: uppercase;
+}
+
+.btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.p-btn {
+    padding: 12px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.btn-main {
+    background: #667eea;
+    color: white !important;
+}
+
+.btn-outline {
+    border: 2px solid #ff4b2b;
+    color: #ff4b2b !important;
+}
+
+.btn-outline:hover {
+    background: #ff4b2b;
+    color: white !important;
+}
+/* Профиль пользователя */
+.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.profile-card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    text-align: center;
+    width: 350px;
+}
+
+#p-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #667eea;
+    margin-bottom: 15px;
+    transition: transform 0.3s;
+}
+
+#p-avatar:hover {
+    transform: scale(1.05);
+}
+
+.profile-card h2 {
+    color: #333;
+    margin: 10px 0;
+    font-size: 24px;
+}
+
+.profile-card p {
+    color: #777;
+    font-size: 14px;
+}
+
+.profile-menu {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profile-btn {
+    padding: 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-home {
+    background: #667eea;
+    color: white;
+}
+
+.btn-logout {
+    border: 2px solid #ff4b2b;
+    color: #ff4b2b;
+}
+
+.btn-logout:hover {
+    background: #ff4b2b;
+    color: white;
+}
+/* Стили для модального окна */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+}
+
+.btn-edit {
+    background: #f3f4f6;
+    color: #374151 !important;
+    border: 1px solid #d1d5db;
+    margin-bottom: 5px;
+}
+
+
+.btn-edit {
+    background: #f0f2f5;
+    color: #4b4b4b !important;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+}
+
+.input-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+.close-modal { float: right; font-size: 24px; cursor: pointer; color: #aaa; }
+
+
+/* Исправление полей ввода */
+.input-group {
+    position: relative;
+    margin-bottom: 25px; /* Резервируем место под надпись снизу */
+}
+
+.input-group i {
+    position: absolute;
+    left: 15px;
+    top: 14px; /* Ровно по центру инпута */
+    color: #667eea;
+    z-index: 2;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px 12px 42px; /* 42px слева, чтобы текст не налезал на иконку */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+/* Стили для надписи "Логин свободен / занят" */
+.status-msg {
+    position: absolute;
+    left: 10px;
+    bottom: -18px; /* Выносим текст ПОД рамку */
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* Аватарка (чистим от inline-стилей) */
+/* Контейнер превью */
+#imagePreview {
+    position: relative;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: #f0f2f5; /* Цвет чуть светлее, чем фон круга */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 3px solid #667eea;
+    margin: 0 auto;
+}
+
+/* Стили для динамически создаваемого изображения */
+#previewImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    animation: fadeIn 0.3s ease-in; /* Плавное появление */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+/* ============================================================
+   НОВЫЙ СТИЛЬ ДЛЯ РЕДАКТИРОВАНИЯ
+   ============================================================ */
+/* --- НОВЫЙ ДИЗАЙН МОДАЛЬНОГО ОКНА --- */
+
+/* Фон затемнения */
+.modal {
+    background-color: rgba(0, 0, 0, 0.6) !important;
+    backdrop-filter: blur(4px); /* Размытие заднего фона */
+}
+
+/* Сама карточка редактирования */
+.modal-content {
+    background: #ffffff !important;
+    border-radius: 20px !important;
+    padding: 30px !important;
+    max-width: 420px !important;
+    width: 95% !important;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2) !important;
+    border: none !important;
+}
+
+/* Заголовок */
+.modal-content h3 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+    font-weight: 700;
+}
+
+/* Поля ввода (Инпуты) */
+#editProfileForm label {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #888;
+    margin-bottom: 6px;
+    display: block;
+    margin-top: 15px;
+}
+
+#editProfileForm input[type="text"],
+#editProfileForm input[type="number"] {
+    width: 100% !important;
+    background: #f4f7f6 !important;
+    border: 2px solid #f4f7f6 !important;
+    border-radius: 10px !important;
+    padding: 12px 15px !important;
+    font-size: 15px !important;
+    transition: all 0.3s ease !important;
+    box-sizing: border-box !important;
+}
+
+#editProfileForm input:focus {
+    background: #fff !important;
+    border-color: #667eea !important;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15) !important;
+    outline: none !important;
+}
+
+/* СТРОКА ДАТЫ РОЖДЕНИЯ (ГЛАВНОЕ ИСПРАВЛЕНИЕ) */
+.birth-date-row {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 10px !important;
+    width: 100% !important;
+    justify-content: space-between !important;
+}
+
+.birth-date-row input {
+    flex: 1 !important; /* Делит строку на 3 равные части */
+    width: 1px !important; /* Маленькая хитрость, чтобы flex сработал корректно */
+    text-align: center !important;
+}
+
+/* Кнопка сохранения */
+.btn-save-profile {
+    width: 100% !important;
+    margin-top: 25px !important;
+    padding: 15px !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 12px !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: transform 0.2s, box-shadow 0.2s !important;
+}
+
+.btn-save-profile:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 7px 15px rgba(118, 75, 162, 0.3) !important;
+}
+
+.chat-container {
+    display: flex;
+    height: 80vh;
+    background: white;
+    margin: 20px auto;
+    max-width: 1000px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.chat-sidebar { width: 30%; border-right: 1px solid #ddd; padding: 15px; }
+.chat-main { width: 70%; display: flex; flex-direction: column; }
+
+.messages-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    background: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Облачка сообщений */
+.msg { padding: 10px 15px; border-radius: 15px; max-width: 70%; position: relative; }
+.msg.sent { align-self: flex-end; background: #667eea; color: white; }
+.msg.received { align-self: flex-start; background: #e4e6eb; color: #333; }
+
+.chat-input-row { padding: 15px; display: flex; gap: 10px; border-top: 1px solid #ddd; }
+.chat-input-row input { flex: 1; padding: 10px; border-radius: 20px; border: 1px solid #ddd; }
+
+.chat-container {
+    display: flex;
+    max-width: 1000px;
+    margin: 20px auto;
+    height: 85vh;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.chat-sidebar { width: 30%; border-right: 1px solid #eee; display: flex; flex-direction: column; }
+.chat-main { width: 70%; display: flex; flex-direction: column; background: #fdfdfd; }
+
+.users-list { overflow-y: auto; flex: 1; }
+.user-item {
+    padding: 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #f9f9f9;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.user-item:hover { background: #f0f2f5; }
+.user-item.active { background: #e7f3ff; border-left: 4px solid #007bff; }
+
+.messages-area {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: #f0f2f5;
+}
+
+/* Облачка сообщений */
+.msg {
+    max-width: 70%;
+    padding: 10px 14px;
+    border-radius: 18px;
+    font-size: 15px;
+    line-height: 1.4;
+    position: relative;
+}
+.msg.sent {
+    align-self: flex-end;
+    background: #0084ff;
+    color: white;
+    border-bottom-right-radius: 2px;
+}
+.msg.received {
+    align-self: flex-start;
+    background: #fff;
+    color: #333;
+    border-bottom-left-radius: 2px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.badge {
+    background-color: #ff4757;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 11px;
+    font-weight: bold;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+.toast-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #007bff;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.user-unread-badge {
+    background-color: #ff4757;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+}
+
+.contact-badge {
+    background-color: #ff4757; /* Красный цвет */
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    min-width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.msg {
+    display: flex;
+    flex-direction: column;
+    min-width: 60px;
+}
+.msg-time {
+    align-self: flex-end;
+}
+
+.chat-input-row {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: #fff;
+    border-top: 1px solid #ddd;
+    gap: 10px;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    color: #555;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.2s;
+}
+
+.icon-btn:hover {
+    color: #007bff;
+}
+
+/* Стиль для активной записи голоса */
+.voice-recording {
+    color: #ff4757 !important;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+.voice-recording {
+    color: #ff4757 !important;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+.delete-icon {
+    margin-left: 10px;
+    cursor: pointer;
+    color: #ccc;
+    font-size: 12px;
+    transition: color 0.2s;
+}
+
+.delete-icon:hover {
+    color: #ff4757; /* Красный цвет при наведении */
+}
+
+/* Можно сделать так, чтобы иконка была видна только при наведении на все сообщение */
+.msg:hover .delete-icon {
+    display: inline-block;
+}
+/* --- ИСПРАВЛЕНИЕ УКАЗАТЕЛЯ МЫШИ --- */
+
+/* Все кнопки, элементы навигации и иконки с действиями */
+button, 
+.nav-item, 
+.user-item, 
+.action-btn, 
+.publish-btn, 
+.icon-btn, 
+.delete-icon, 
+.p-btn,
+.profile-btn,
+.close-preview,
+.close-modal,
+.file-label {
+    cursor: pointer !important; /* Принудительно ставим "руку" */
+}
+
+/* Специфические кнопки управления группой (Добавить, Исключить, Удалить) */
+.group-controls button, 
+#del-group-btn {
+    cursor: pointer !important;
+}
+
+/* Для ссылок, которые выглядят как кнопки */
+a.file-msg-link, 
+a.btn-main, 
+a.btn-outline {
+    cursor: pointer;
+}
+
+/* Чтобы текст в сообщениях выделялся как обычно, а не "рукой" */
+.msg-text {
+    cursor: text;
+}
+/* Делаем элементы списка друзей кликабельными */
+#friends-list-full .user-item {
+    cursor: pointer !important;
+    transition: background 0.2s;
+}
+
+#friends-list-full .user-item:hover {
+    background-color: #f0f2f5 !important;
+}
+
+/* Указатель для кнопки "Написать" */
+#friends-list-full .publish-btn {
+    cursor: pointer !important;
+}
+/* Стиль логотипа в чате */
+.chat-sidebar .logo {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    background: transparent;
+}
+
+/* Эффект при наведении */
+.chat-sidebar .logo:hover {
+    background: rgba(0, 123, 255, 0.1); /* Легкий голубой фон */
+    color: #007bff; /* Меняем цвет текста на основной синий */
+    transform: translateX(-3px); /* Легкое смещение влево (эффект "назад") */
+}
+
+/* Эффект при нажатии */
+.chat-sidebar .logo:active {
+    transform: scale(0.95);
+}
+/* --- Стили для страницы профиля пользователя --- */
+
+.profile-wrapper {
+    max-width: 700px;
+    margin: 30px auto;
+    background: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.cover-photo {
+    height: 180px;
+    background: linear-gradient(135deg, #007bff 0%, #00d2ff 100%);
+    position: relative;
+}
+
+.back-nav {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 8px 15px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.back-nav:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.profile-header-main {
+    padding: 0 30px 30px;
+    text-align: center;
+}
+
+.avatar-container {
+    width: 140px;
+    height: 140px;
+    margin: -70px auto 15px;
+    position: relative;
+}
+
+.avatar-container img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #ffffff;
+    background: #f8f9fa;
+}
+
+.user-info h1 {
+    margin: 0;
+    font-size: 26px;
+    color: #2d3436;
+}
+
+.user-info p {
+    margin: 5px 0 25px;
+    color: #636e72;
+    font-size: 16px;
+}
+
+.profile-btns {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+/* Кнопки */
+.btn-action {
+    padding: 12px 28px;
+    border-radius: 12px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.2s ease;
+}
+
+.btn-subscribe {
+    background: #007bff;
+    color: white;
+}
+
+.btn-subscribe:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+}
+
+.btn-subscribe.active {
+    background: #f1f2f6;
+    color: #2f3542;
+}
+
+.btn-message {
+    background: #f1f2f6;
+    color: #2f3542;
+}
+
+.btn-message:hover {
+    background: #dfe4ea;
+}
+
+/* Статистика */
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 25px;
+    border-top: 1px solid #f1f2f6;
+}
+
+.stat-box {
+    text-align: center;
+}
+
+.stat-num {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    color: #2d3436;
+}
+
+.stat-text {
+    font-size: 13px;
+    color: #b2bec3;
+    text-transform: uppercase;
+}
