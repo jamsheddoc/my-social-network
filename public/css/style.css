@@ -1056,6 +1056,48 @@ a.btn-outline {
     color: #b2bec3;
     text-transform: uppercase;
 }
+/* --- СТИЛИ ДЛЯ ГАМБУРГЕРА --- */
+.mobile-menu-btn {
+    display: none; /* Скрыто на компьютере */
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+}
+
+/* Скрываем элементы на разных устройствах */
+.mobile-only { display: none; }
+
+@media (max-width: 850px) {
+    .mobile-menu-btn { display: block; }
+    .desktop-only { display: none; }
+    .mobile-only { display: block; }
+
+    .sidebar {
+        position: fixed;
+        left: -280px; /* Прячем */
+        top: 60px;
+        z-index: 2000;
+        transition: 0.3s;
+        background: white;
+        height: 100vh;
+        box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+    }
+
+    .sidebar.active {
+        left: 0; /* Показываем */
+    }
+
+    .extra {
+        display: none; /* Правую колонку скрываем совсем */
+    }
+    
+    main.feed {
+        width: 100%;
+        padding: 10px;
+    }
+}
 /* ============================================================
    АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ И ПЛАНШЕТОВ
    ============================================================ */
