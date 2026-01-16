@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация | MyNetwork</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+<div class="auth-container">
+    <div class="auth-card">
+        <h2>Создать аккаунт</h2>
+        
+        <form id="regForm" enctype="multipart/form-data">
+            <div class="avatar-picker">
+                <div id="imagePreview">
+                    <span id="placeholderText">ФОТО</span>
+                </div>
+                
+                <label for="avatarInput" class="file-label">
+                    <i class="fas fa-plus"></i>
+                </label>
+                <input type="file" id="avatarInput" name="avatar" accept="image/*" hidden>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-address-card"></i>
+                <input type="text" name="lastName" placeholder="Фамилия" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-user-tag"></i>
+                <input type="text" name="firstName" placeholder="Имя" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-user-edit"></i>
+                <input type="text" name="middleName" placeholder="Отчество">
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-calendar-alt"></i>
+                <input type="number" name="birthDay" placeholder="День" min="1" max="31" style="width: 30%; margin-right: 5px;">
+                <select name="birthMonth" style="width: 40%; margin-right: 5px;">
+                    <option value="">Месяц</option>
+                    <option value="1">Январь</option>
+                    <option value="2">Февраль</option>
+                    <option value="3">Март</option>
+                    <option value="4">Апрель</option>
+                    <option value="5">Май</option>
+                    <option value="6">Июнь</option>
+                    <option value="7">Июль</option>
+                    <option value="8">Август</option>
+                    <option value="9">Сентябрь</option>
+                    <option value="10">Октябрь</option>
+                    <option value="11">Ноябрь</option>
+                    <option value="12">Декабрь</option>
+                </select>
+                <input type="number" name="birthYear" placeholder="Год" min="1950" max="2024" style="width: 30%;">
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-globe"></i>
+                <input type="text" name="country" placeholder="Страна" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-city"></i>
+                <input type="text" name="city" placeholder="Город" required>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-phone"></i>
+                <input type="tel" name="phone" placeholder="Номер телефона" required>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" name="username" placeholder="Логин" required id="usernameInput">
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" name="password" placeholder="Пароль" required>
+            </div>
+
+            <button type="submit" class="reg-btn">Зарегистрироваться</button>
+        </form>
+        
+        <p class="auth-footer">
+            Уже есть аккаунт? <a href="login.html">Войти</a>
+        </p>
+    </div>
+</div>
+<script src="js/register-handler.js"></script>
+</body>
+</html>
