@@ -557,6 +557,43 @@ friendsList.innerHTML = users.map(user => `
             console.error(err);
         });
 }
+/* --- МОБИЛЬНОЕ МЕНЮ --- */
+
+function toggleMobileMenu() {
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.getElementById('mobile-overlay');
+    
+    // Проверяем, существует ли оверлей, если нет — создаем его программно
+    let mobileOverlay = document.getElementById('mobile-overlay');
+    if (!mobileOverlay) {
+        mobileOverlay = document.createElement('div');
+        mobileOverlay.id = 'mobile-overlay';
+        mobileOverlay.style.cssText = 'display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1500;';
+        mobileOverlay.onclick = toggleMobileMenu;
+        document.body.appendChild(mobileOverlay);
+    }
+
+    sidebar.classList.toggle('active');
+
+    // Показываем или скрываем затемнение
+    if (sidebar.classList.contains('active')) {
+        mobileOverlay.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // Запрещаем прокрутку фона
+    } else {
+        mobileOverlay.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Возвращаем прокрутку
+    }
+}
+
+// Функция для закрытия меню при клике на пункт (чтобы не висело открытым)
+function closeMobileMenu() {
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.getElementById('mobile-overlay');
+    if (sidebar) sidebar.classList.remove('active');
+    if (overlay) overlay.style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
 // Запускаем проверку каждые 7 секунд
 setInterval(checkGlobalNotifications, 7000);
+
 checkGlobalNotifications(); // И один раз при загрузке
