@@ -1107,7 +1107,6 @@ a.btn-outline {
 }
 
 @media (max-width: 850px) {
-    .sidebar { display: none; } /* Скрываем левую колонку на маленьких экранах */
     .top-nav { justify-content: space-between; padding: 0 20px; }
 }
 
