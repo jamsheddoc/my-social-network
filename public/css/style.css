@@ -1107,7 +1107,30 @@ a.btn-outline {
 }
 
 @media (max-width: 850px) {
-    .top-nav { justify-content: space-between; padding: 0 20px; }
+    /* 1. Вместо удаления, превращаем колонку в скрытое выезжающее меню */
+    .sidebar { 
+        display: block !important; /* Отменяем скрытие */
+        position: fixed;
+        left: -285px; /* Прячем за левый край экрана */
+        top: 60px;
+        z-index: 2000;
+        transition: 0.3s ease-in-out;
+        background: white;
+        height: calc(100vh - 60px);
+        width: 280px;
+        box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+    }
+
+    /* 2. Этот класс будет включать видимость (добавляется через JS) */
+    .sidebar.active {
+        left: 0 !important;
+    }
+
+    /* 3. Оставляем вашу настройку навигации */
+    .top-nav { 
+        justify-content: space-between; 
+        padding: 0 20px; 
+    }
 }
 
 @media (max-width: 600px) {
