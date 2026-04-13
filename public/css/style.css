@@ -1107,32 +1107,35 @@ a.btn-outline {
 }
 
 @media (max-width: 850px) {
-    /* 1. Вместо удаления, превращаем колонку в скрытое выезжающее меню */
-    .sidebar { 
-        display: block !important; /* Отменяем скрытие */
+    .sidebar {
+        display: flex !important; /* Убеждаемся, что контент внутри меню виден */
+        flex-direction: column;
         position: fixed;
-        left: -285px; /* Прячем за левый край экрана */
-        top: 60px;
-        z-index: 2000;
-        transition: 0.3s ease-in-out;
-        background: white;
-        height: calc(100vh - 60px);
-        width: 280px;
-        box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+        left: -100%; /* Скрываем полностью за левым краем */
+        top: 0;
+        bottom: 0;
+        width: 280px; /* Фиксированная ширина меню */
+        background-color: #ffffff; /* Белый фон */
+        z-index: 9999; /* Поверх всего */
+        transition: left 0.3s ease; /* Плавное выезжание */
+        box-shadow: 10px 0 20px rgba(0,0,0,0.2); /* Тень, чтобы отделить от сайта */
+        padding: 80px 20px 20px 20px; /* Отступы внутри: сверху побольше, чтобы не перекрывать кнопку */
     }
 
-    /* 2. Этот класс будет включать видимость (добавляется через JS) */
+    /* Когда меню открыто */
     .sidebar.active {
         left: 0 !important;
     }
 
-    /* 3. Оставляем вашу настройку навигации */
-    .top-nav { 
-        justify-content: space-between; 
-        padding: 0 20px; 
+    /* Ссылки внутри меню делаем крупнее для пальца */
+    .sidebar a {
+        padding: 15px 10px;
+        font-size: 18px;
+        border-bottom: 1px solid #f0f0f0;
+        text-decoration: none;
+        color: #333;
     }
 }
-
 @media (max-width: 600px) {
     .container {
         padding: 10px 5px; /* Минимальные отступы по бокам */
